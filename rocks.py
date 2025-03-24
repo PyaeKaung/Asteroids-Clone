@@ -19,7 +19,7 @@ class Asteroid:
     def __init__(self, center, radius):
         self.pos = getrandompos(center, radius)
         self.image = random.choice(asteroidimages)
-        scale = random.uniform(1, 2)
+        scale = random.uniform(0.7, 1.5)
         self.image = pg.transform.scale(self.image, (self.image.get_width() * scale, self.image.get_height() * scale))
         self.angle = random.uniform(0, 360)
         self.rotated_image = pg.transform.rotate(self.image, self.angle)
@@ -41,7 +41,6 @@ class Asteroid:
         self.rect = self.rotated_image.get_rect(center=self.pos)
 
     def draw(self, screen, camx, camy):
-        # Draw the rotated image on the screen
         screen.blit(self.rotated_image, (self.pos.x - camx, self.pos.y - camy))
 
 def generate_asteroids(num_asteroids, world_center, world_radius):
