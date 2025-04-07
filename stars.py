@@ -15,6 +15,4 @@ def getrandompos(center, radius):
 spawnlimit = random.randint(200,300)
 worldcenter = (world_radius, world_radius)
 
-star = pg.transform.scale(pg.image.load('images/star.png'), (30, 30))
-
 spawn_points = [getrandompos(worldcenter, world_radius) for _ in range(spawnlimit)]
