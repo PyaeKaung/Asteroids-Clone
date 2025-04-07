@@ -37,6 +37,10 @@ class Asteroid:
     def draw(self, screen, camx, camy):
         screen.blit(self.rotated_image, (self.pos.x - camx, self.pos.y - camy))
 
+    def get_screen_rect(self, camx, camy):
+        screen_rect = self.rect.copy()
+        screen_rect.topleft = (self.rect.x - camx, self.rect.y - camy)
+        return screen_rect
+
 def generate_asteroids(num_asteroids, world_center, world_radius, asteroidimages):
     return [Asteroid(world_center, world_radius, asteroidimages) for _ in range(num_asteroids)]
-
