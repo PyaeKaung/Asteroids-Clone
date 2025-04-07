@@ -11,6 +11,7 @@ import fire
 import healthbar
 from enemy import Enemy
 
+
 pg.init()
 pg.mixer.init()
 
@@ -191,7 +192,7 @@ while run:
                 if asteroid.collision(rotated_hitbox):
                     player.player_health -= 25
                     asteroid_list.remove(asteroid)
-                    asteroid_list.append(rocks.Asteroid((world_radius, world_radius), world_radius))
+                    asteroid_list.append(rocks.Asteroid((world_radius, world_radius), world_radius, asteroidsprites))
 
             for b in enemy_bullets[:]:
                 if b.collision(rotated_hitbox):
@@ -286,12 +287,12 @@ while run:
 
 
                 for asteroid in asteroid_list:
-                    if asteroid.rect.colliderect(bullet_rect):
+                    if asteroid.get_screen_rect(camx, camy).colliderect(bullet_rect):
                         asteroid.hp -= 5
                         hit = True
                         if asteroid.hp <= 0:
                             asteroid_list.remove(asteroid)
-                            asteroid_list.append(rocks.Asteroid((world_radius, world_radius), world_radius))
+                            asteroid_list.append(rocks.Asteroid((world_radius, world_radius), world_radius, asteroidsprites))
                         break
                 if hit:
                     bullets.remove(bullet)
