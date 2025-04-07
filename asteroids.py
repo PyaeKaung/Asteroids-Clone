@@ -57,6 +57,7 @@ mmbutimg = pg.transform.scale(pg.image.load('images/mainmenubutton.png'), (120, 
 enemy_image = pg.transform.scale(pg.image.load('images/enemy.png'), (70, 30)).convert_alpha()
 playerch = pg.image.load('images/shipsprite.png')
 playerch = pg.transform.scale(playerch, (120, 84))
+star = pg.transform.scale(pg.image.load('images/star.png'), (30, 30))
 
 player.player_first_instance = playerch
 asteroid_list = rocks.generate_asteroids(100, (world_radius, world_radius), world_radius)
@@ -173,7 +174,7 @@ while run:
             if len(enemies) < 7:
                 enemies.append(Enemy(player, enemy_bullets, enemy_image, enemyfiresound))
             for pos in stars.spawn_points:
-                screen.blit(stars.star, (pos.x - camx, pos.y - camy))
+                screen.blit(star, (pos.x - camx, pos.y - camy))
             for enemy in enemies:
                 enemy.update()
                 enemy.draw(screen, camx, camy)
