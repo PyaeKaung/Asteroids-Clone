@@ -58,9 +58,12 @@ enemy_image = pg.transform.scale(pg.image.load('images/enemy.png'), (70, 30)).co
 playerch = pg.image.load('images/shipsprite.png')
 playerch = pg.transform.scale(playerch, (120, 84))
 star = pg.transform.scale(pg.image.load('images/star.png'), (30, 30))
+asteroidsprites = [pg.transform.scale(pg.image.load('images/asteroid1.png'), (70, 70)),
+                   pg.transform.scale(pg.image.load('images/asteroid2.png'), (70, 70)),
+                   pg.transform.scale(pg.image.load('images/asteroid3.png'), (70, 70))]
 
 player.player_first_instance = playerch
-asteroid_list = rocks.generate_asteroids(100, (world_radius, world_radius), world_radius)
+asteroid_list = rocks.generate_asteroids(100, (world_radius, world_radius), world_radius, asteroidsprites)
 
 #Button instances
 startbutton = buttonclass.Button(100, 50, startbutimg, 2)
@@ -183,7 +186,7 @@ while run:
             rotated_hitbox = rotated_player.get_rect(center=player.player_pos)
 
             for asteroid in asteroid_list:
-                asteroid.update((world_radius, world_radius), world_radius)
+                asteroid.update((world_radius, world_radius), world_radius, asteroidsprites)
                 asteroid.draw(screen, camx, camy)
                 if asteroid.collision(rotated_hitbox):
                     player.player_health -= 25
