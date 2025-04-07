@@ -2,12 +2,6 @@ import pygame as pg
 import random
 import math
 
-asteroidimages = [
-    pg.transform.scale(pg.image.load('images/asteroid1.png'), (70, 70)),
-    pg.transform.scale(pg.image.load('images/asteroid2.png'), (70, 70)),
-    pg.transform.scale(pg.image.load('images/asteroid3.png'), (70, 70))
-]
-
 def getrandompos(center, radius):
     while True:
         x = random.uniform(center[0] - radius, center[0] + radius)
@@ -16,7 +10,7 @@ def getrandompos(center, radius):
             return pg.Vector2(x, y)
 
 class Asteroid:
-    def __init__(self, center, radius):
+    def __init__(self, center, radius, asteroidimages):
         self.pos = getrandompos(center, radius)
         self.image = random.choice(asteroidimages)
         scale = random.uniform(0.7, 1.5)
@@ -31,7 +25,7 @@ class Asteroid:
     def collision(self, player_rect):
         return self.rect.colliderect(player_rect)
 
-    def update(self, worldcenter, world_radius):
+    def update(self, worldcenter, world_radius, asteroidimages):
         self.pos += self.direction * self.speed
         distance_from_center = self.pos.distance_to(pg.Vector2(worldcenter))
         if distance_from_center > world_radius:
@@ -43,5 +37,6 @@ class Asteroid:
     def draw(self, screen, camx, camy):
         screen.blit(self.rotated_image, (self.pos.x - camx, self.pos.y - camy))
 
-def generate_asteroids(num_asteroids, world_center, world_radius):
-    return [Asteroid(world_center, world_radius) for _ in range(num_asteroids)]
+def generate_asteroids(num_asteroids, world_center, world_radius, asteroidimages):
+    return [Asteroid(world_center, world_radius, asteroidimages) for _ in range(num_asteroids)]
+
